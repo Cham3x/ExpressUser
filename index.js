@@ -11,13 +11,22 @@ const registerRoutes = require('./routes/registerRoutes');
 const logRoutes = require('./routes/logRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-
+const AnnonceRoutes = require('./routes/AnnonceRoutes');
+const HomeControllers = require('./controllers/HomeControllers');
 
 // View engine
 app.set('view engine','ejs');
 app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+});
 
 // Session config
 app.use(session({
@@ -35,16 +44,15 @@ app.use((req, res, next) => {
 });
 
 // HOME
-app.get("/", (req,res)=>{
-    //res.send('Hello');
-    res.render('index', {title: 'Home', loggedIn: req.session.loggedIn});
-})
+app.get("/", HomeControllers.showAnnonces);
+
+  
 
 app.use('/', logRoutes)
 app.use('/user',userRoutes)
 app.use('/register',registerRoutes)
 app.use('/admin',adminRoutes)
-
+app.use('/annonce',AnnonceRoutes)
 app.use((req,res)=>{
     res.status(404).render('404', {title: '404'});
 })

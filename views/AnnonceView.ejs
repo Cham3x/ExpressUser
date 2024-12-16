@@ -1,0 +1,33 @@
+<html lang="en">
+    <%- include('./partials/head.ejs'); %>
+<body>
+    <%- include('./partials/nav.ejs'); %>
+
+    <main>
+        <h1>Annonce</h1>
+        <article>
+
+
+            <% if( typeof datas != 'undefined' ){ %>
+
+                
+                <article class="annonce">
+                    <h2> <%= datas.title %> </h2>
+                    <p>  <%= datas.price %> €</p>
+                    <p>  <%= datas.category %> </p>
+                    <p>  <%= datas.description %> </p>
+                    <p> <%= datas.userName  %></p>
+                </article>       
+
+                
+    
+            <% }else{ %>
+                <p>c'est vide coco</p>
+                    
+                <% } %>
+        </article>
+    </main>
+
+    <%- include('./partials/footer.ejs'); %>
+</body>
+</html>

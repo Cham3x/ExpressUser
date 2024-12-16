@@ -1,0 +1,1 @@
+INSERT INTO annonces (userName,title,price,category,description) VALUES('cindy','album',20,'musique','un album de kpop');

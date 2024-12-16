@@ -4,7 +4,24 @@
     <%- include('./partials/nav.ejs'); %>
 
     <main>
-        <h1>Hello!</h1>
+        <h1>Les annonces</h1>
+
+        <% if( typeof datas != 'undefined' ){ %>
+            
+            <% datas.forEach(data => { %>
+            <a href="/annonce/<%= data.id %>">
+            <article class="annonce">
+                <h2> <%= data.title %> </h2>
+                <p>  <%= data.price %> </p>
+            </article> </a>        
+            <% }); %>
+            
+
+        <% }else{ %>
+            <p>c'est vide</p>
+                
+            <% } %>
+        
     </main>
 
     <%- include('./partials/footer.ejs'); %>

@@ -4,7 +4,53 @@
     <%- include('./partials/nav.ejs'); %>
 
     <main>
-        <h1>Hello <%= user.name %></h1>
+
+        
+<nav>
+    <ul>
+    <li><a href="/user/:id/add">add</a></li>
+    <li><a href="/user/:id/delete">supp</a></li>
+
+    </ul>
+</nav>
+
+
+            <% if(typeof action != 'undefined' && action=='add'){ %>
+                <h2>Création d'une annonce</h2>
+                <% if(typeof result != 'undefined' && result==true){ %>
+                    <p class="result">L'annonce a été créée.</p>
+                <% } %>
+            <form class="form" method="POST">
+                <label for="title">Titre de l'annonce : </label>
+                <input type="text" name="title" id="title">
+                <label for="price">Tarif : </label>
+                <input type="number" name="price" id="price">
+                <label for="category">Catégorie de l'annonce : </label>
+                <input type="text" name="category" id="category">
+                <label for="description">Description de l'annonce : </label>
+                <textarea name="description" id="description"></textarea>
+                <input type="submit" value="Publier">
+            </form>
+<% } %>
+
+
+<% if(typeof action != 'undefined' && action=='delete'){ %>
+    <h2>suppression</h2>
+    
+     <% datas.forEach(data => {  %>      
+        <article class="annonce">
+        <h2> <%= data.title %> </h2>
+        <p>  <%= data.price %> €</p>
+        <p>  <%= data.category %> </p>
+        <p>  <%= data.description %> </p>
+        <p> <%= data.userName  %></p>
+        <form method="post">
+            <input type="hidden" name="annonce" value=<%= data.id %>>
+            <input type="submit" value="suppression">
+        </form>
+    </article>   
+        
+   <%  })} %>
     </main>
 
     <%- include('./partials/footer.ejs'); %>
